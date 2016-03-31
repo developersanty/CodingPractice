@@ -1,6 +1,8 @@
 /**
  * Created by sj034021 on 3/12/16.
  */
+package CodingPractice.datastructures;
+
 public class BinaryNode {
   BinaryNode left;
   BinaryNode right;

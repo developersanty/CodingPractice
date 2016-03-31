@@ -1,3 +1,5 @@
+package CodingPractice.datastructures;
+
 class BinarySearchTree{
    BinaryNode add(BinaryNode node, int data){
     if(node == null) {
@@ -127,7 +129,7 @@ class BinarySearchTree{
       returnedResult = findClosestElement(node.right, data);// go left and search
     }
 
-    if(returnedResult!=null && (Math.abs(closest.data - data)) > (Math.abs(returnedResult.data))){
+    if(returnedResult!=null && (Math.abs(closest.data - data)) > (Math.abs(returnedResult.data - data))){
       closest = returnedResult;
     }
 
@@ -144,7 +146,8 @@ class BinarySearchTree{
     //root = bst.add(root, 2);
     root = bst.add(root, 2);
     root = bst.add(root, 4);
-    root = bst.findClosestElement(root, 5);
+    root = bst.add(root, 100);
+    root = bst.findClosestElement(root, 60);
     System.out.print(root.data);
     //root = bst.delete(root, 2);
     //bst.printInOrder(root);
