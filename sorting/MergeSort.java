@@ -1,4 +1,4 @@
-package CodingPractice.problems;
+package sorting;
 
 /**
  * Created by sj034021 on 3/31/16.
