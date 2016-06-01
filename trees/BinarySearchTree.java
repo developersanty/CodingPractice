@@ -20,17 +20,25 @@ public class BinarySearchTree {
   * */
   Node add(Node newNode, int data) {
     if (newNode == null) {
-       newNode = new Node();
-       newNode.data = data;
-    } else {
-      if(data <= newNode.data) {
+       newNode = new Node(data);
+    } else if(data <= newNode.data) {
         newNode.left = add(newNode.left, data);
-      } else {
-        newNode.right = add(newNode.right, data);
-      }
+    } else {
+      newNode.right = add(newNode.right, data);
     }
 
     return newNode;
+  }
+
+  void printInOrder(Node node) {
+    if(node == null) {
+      return;
+    }
+    printInOrder(node.left);
+
+    System.out.println(node.data);
+
+    printInOrder(node.right);
   }
 
   public static void main(String args[]) {
@@ -44,6 +52,6 @@ public class BinarySearchTree {
     root = tree.add(root, 8);
     root = tree.add(root, 12);
     root = tree.add(root, 12);
-    System.out.print("tree");
+    tree.printInOrder(root);
   }
 }
