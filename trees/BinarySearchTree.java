@@ -34,12 +34,31 @@ public class BinarySearchTree {
     if(node == null) {
       return;
     }
+
     printInOrder(node.left);
-
     System.out.println(node.data);
-
     printInOrder(node.right);
   }
+
+  void printPreOrder(Node node) {
+    if(node == null) {
+      return;
+    }
+
+    System.out.println(node.data);
+    printPreOrder(node.left);
+    printPreOrder(node.right);
+  }
+
+  void printPostOrder(Node node) {
+    if(node == null) {
+      return;
+    }
+    printPostOrder(node.left);
+    printPostOrder(node.right);
+    System.out.println(node.data);
+  }
+
 
   public static void main(String args[]) {
     BinarySearchTree tree = new BinarySearchTree();
@@ -53,5 +72,9 @@ public class BinarySearchTree {
     root = tree.add(root, 12);
     root = tree.add(root, 12);
     tree.printInOrder(root);
+    System.out.println("---");
+    tree.printPreOrder(root);
+    System.out.println("---");
+    tree.printPostOrder(root);
   }
 }
