@@ -1,8 +1,9 @@
 package trees;
-
 /**
  * Created by sj034021 on 5/31/16.
  */
+
+import queues.*;
 public class BinarySearchTree {
   /*
    *  Property:
@@ -59,6 +60,28 @@ public class BinarySearchTree {
     System.out.println(node.data);
   }
 
+  void levelOrder(Node node, Queue q) {
+    if (node == null) {
+      System.out.print("No donuts for you!");
+    }
+
+    if(q.size()!=0) {
+      q.dequeue();
+    }
+
+    System.out.println(node.data);
+    if(node.left!=null) {
+      q.enqueue(node.left);
+    }
+    if(node.right!=null){
+      q.enqueue(node.right);
+    }
+
+    if(q.size()!=0) {
+      levelOrder(q.peek(), q);
+    }
+  }
+
 
   public static void main(String args[]) {
     BinarySearchTree tree = new BinarySearchTree();
@@ -76,5 +99,8 @@ public class BinarySearchTree {
     tree.printPreOrder(root);
     System.out.println("---");
     tree.printPostOrder(root);
+    System.out.println("---");
+    Queue x = new Queue();
+    tree.levelOrder(root, x);
   }
 }
