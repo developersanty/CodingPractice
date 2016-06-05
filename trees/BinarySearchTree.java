@@ -82,6 +82,15 @@ public class BinarySearchTree {
     }
   }
 
+  public int height(Node node) {
+    int height = -1;
+
+    if(node == null) {
+      return height;
+    }
+
+    return Math.max(height(node.left), height(node.right)) + 1;
+  }
 
   public static void main(String args[]) {
     BinarySearchTree tree = new BinarySearchTree();
@@ -94,13 +103,24 @@ public class BinarySearchTree {
     root = tree.add(root, 8);
     root = tree.add(root, 12);
     root = tree.add(root, 12);
+    System.out.println("IN ORDER TRAVERSAL RESULT");
+    System.out.println("-------------------------");
     tree.printInOrder(root);
-    System.out.println("---");
+    System.out.println("\n");
+    System.out.println("PRE ORDER TRAVERSAL RESULT");
+    System.out.println("--------------------------");
     tree.printPreOrder(root);
-    System.out.println("---");
+    System.out.println("\n");
+    System.out.println("POST ORDER TRAVERSAL RESULT");
+    System.out.println("---------------------------");
     tree.printPostOrder(root);
-    System.out.println("---");
+    System.out.println("\n");
+    System.out.println("LEVEL ORDER TRAVERSAL RESULT");
+    System.out.println("----------------------------");
     Queue x = new Queue();
     tree.levelOrder(root, x);
+    System.out.println("\n");
+    System.out.println("HEIGHT OF A TREE:" + tree.height(root));
+    System.out.println("\n");
   }
 }
