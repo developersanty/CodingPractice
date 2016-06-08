@@ -31,6 +31,23 @@ public class BinarySearchTree {
     return newNode;
   }
 
+  Node search(Node node, int data) {
+    Node response = null;
+    if(node.data == data) {
+      return node;
+    }
+
+    if(node.left!=null) {
+      response = search(node.left, data);
+    }
+
+    if(node.right!=null & response == null) {
+      response = search(node.right, data);
+    }
+
+    return response;
+  }
+
   void printInOrder(Node node) {
     if(node == null) {
       return;
@@ -121,6 +138,11 @@ public class BinarySearchTree {
     tree.levelOrder(root, x);
     System.out.println("\n");
     System.out.println("HEIGHT OF A TREE:" + tree.height(root));
+    System.out.println("\n");
+    System.out.println("\n");
+    System.out.println("SEARCH NODE IN A TREE: " + tree.search(root, 6).data);
+    System.out.println("SEARCH NODE IN A TREE: " + tree.search(root, 7).data);
+    System.out.println("SEARCH NODE IN A TREE: " + tree.search(root, 12).data);
     System.out.println("\n");
   }
 }
