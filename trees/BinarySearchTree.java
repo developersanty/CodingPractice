@@ -33,19 +33,62 @@ public class BinarySearchTree {
 
   Node search(Node node, int data) {
     Node response = null;
-    if(node.data == data) {
+    if (node.data == data) {
       return node;
     }
 
-    if(node.left!=null) {
+    if (node.left != null) {
       response = search(node.left, data);
     }
 
-    if(node.right!=null & response == null) {
+    if (node.right != null & response == null) {
       response = search(node.right, data);
     }
 
     return response;
+  }
+
+  Node delete(Node node, int data) {
+    if(data < node.data) {
+      node.left = delete(node.left, data);
+    }
+    else if(data > node.data) {
+      node.right = delete(node.right, data);
+    }
+    else {
+      if(node.left==null && node.right == null) {
+        return null;
+      }
+      else if((node.left==null && node.right!=null )|| (node.right==null &&  node.left!=null)) {
+        if(node.left==null) {
+          return  node.right;
+        }
+
+        if(node.right==null) {
+          return node.left;
+        }
+      } else {
+        Node maxInLeft = findMax(node.left);
+        int leftMaxData = maxInLeft.data;
+        int currentData = node.data;
+
+        node.data = leftMaxData;
+        maxInLeft.data = currentData;
+
+        node.left = delete(node.left, currentData);
+      }
+    }
+
+    return node;
+  }
+
+  Node findMax(Node node) {
+    Node temp = node;
+    while(temp.right!=null) {
+      temp = temp.right;
+    }
+
+    return temp;
   }
 
   void printInOrder(Node node) {
@@ -119,8 +162,13 @@ public class BinarySearchTree {
     root = tree.add(root, 6);
     root = tree.add(root, 8);
     root = tree.add(root, 12);
-    root = tree.add(root, 12);
-    System.out.println("IN ORDER TRAVERSAL RESULT");
+    root = tree.add(root, 13);
+    root = tree.add(root, 5);
+    tree.delete(root, 4);
+    tree.delete(root, 9);
+    Queue x = new Queue();
+    tree.printInOrder(root);
+    /*System.out.println("IN ORDER TRAVERSAL RESULT");
     System.out.println("-------------------------");
     tree.printInOrder(root);
     System.out.println("\n");
@@ -143,6 +191,6 @@ public class BinarySearchTree {
     System.out.println("SEARCH NODE IN A TREE: " + tree.search(root, 6).data);
     System.out.println("SEARCH NODE IN A TREE: " + tree.search(root, 7).data);
     System.out.println("SEARCH NODE IN A TREE: " + tree.search(root, 12).data);
-    System.out.println("\n");
+    System.out.println("\n");*/
   }
 }
