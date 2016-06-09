@@ -91,6 +91,15 @@ public class BinarySearchTree {
     return temp;
   }
 
+  Node findMin(Node node) {
+    Node temp = node;
+    while (temp.left!=null) {
+      temp = temp.left;
+    }
+
+    return temp;
+  }
+
   void printInOrder(Node node) {
     if(node == null) {
       return;
@@ -164,8 +173,9 @@ public class BinarySearchTree {
     root = tree.add(root, 12);
     root = tree.add(root, 13);
     root = tree.add(root, 5);
-    tree.delete(root, 4);
-    tree.delete(root, 9);
+    root = tree.add(root, 11);
+    // tree.delete(root, 4);
+    tree.delete(root, 12);
     Queue x = new Queue();
     tree.printInOrder(root);
     /*System.out.println("IN ORDER TRAVERSAL RESULT");
