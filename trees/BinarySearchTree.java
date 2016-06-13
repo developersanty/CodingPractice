@@ -151,6 +151,25 @@ public class BinarySearchTree {
     }
   }
 
+  public Node findClosestNode(Node node, int data) {
+    Node result = null;
+    if(node.left!=null && data < node.data) {
+      result = findClosestNode(node.left, data);
+    } else if(node.right!=null && data > node.data) {
+      result = findClosestNode(node.right, data);
+    }
+
+    if(result == null || difference(result.data, data) >= difference(node.data, data)) {
+      return node;
+    } else {
+      return result;
+    }
+  }
+
+  int difference(int closestNodeData, int actualNodeData) {
+    return Math.abs(closestNodeData - actualNodeData);
+  }
+
   public int height(Node node) {
     int height = -1;
 
@@ -164,20 +183,20 @@ public class BinarySearchTree {
   public static void main(String args[]) {
     BinarySearchTree tree = new BinarySearchTree();
 
-    Node root = tree.add(null, 7);
-    root = tree.add(root, 4);
-    root = tree.add(root, 9);
-    root = tree.add(root, 3);
-    root = tree.add(root, 6);
-    root = tree.add(root, 8);
-    root = tree.add(root, 12);
-    root = tree.add(root, 13);
-    root = tree.add(root, 5);
-    root = tree.add(root, 11);
+    Node root = tree.add(null, 70);
+    root = tree.add(root, 40);
+    root = tree.add(root, 90);
+    root = tree.add(root, 30);
+    root = tree.add(root, 60);
+    root = tree.add(root, 80);
+    root = tree.add(root, 120);
+    root = tree.add(root, 130);
+    //root = tree.add(root, 5);
+    root = tree.add(root, 110);
     // tree.delete(root, 4);
-    tree.delete(root, 12);
-    Queue x = new Queue();
-    tree.printInOrder(root);
+    // tree.delete(root, 12);
+    // Queue x = new Queue();
+    // tree.printInOrder(root);
     /*System.out.println("IN ORDER TRAVERSAL RESULT");
     System.out.println("-------------------------");
     tree.printInOrder(root);
@@ -202,5 +221,6 @@ public class BinarySearchTree {
     System.out.println("SEARCH NODE IN A TREE: " + tree.search(root, 7).data);
     System.out.println("SEARCH NODE IN A TREE: " + tree.search(root, 12).data);
     System.out.println("\n");*/
+    System.out.println(tree.findClosestNode(root, 65).data);
   }
 }
