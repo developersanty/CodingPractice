@@ -7,7 +7,7 @@ public class LinkedList {
   Node root = null;
 
   /* add iteratively */
-  void add(int data) {
+  public void add(int data) {
     Node newNode = new Node(data);
     if (root == null) {
       root = newNode;
@@ -23,7 +23,7 @@ public class LinkedList {
   }
 
   /* remove iteratively */
-  void remove(int data) {
+  public void remove(int data) {
     Node tempNode = root;
     Node previousNode = null;
 
@@ -42,7 +42,7 @@ public class LinkedList {
    }
   }
 
-  Node search(int data) {
+  public Node search(int data) {
     Node tempNode = root;
 
     while(tempNode!=null) {
@@ -56,11 +56,11 @@ public class LinkedList {
     return null;
   }
 
-  void printList() {
+  public void printList() {
     Node tempNode = root;
 
     while(tempNode!=null) {
-      System.out.println(tempNode.data);
+      System.out.print(" "+tempNode.data);
       tempNode = tempNode.next;
     }
   }
