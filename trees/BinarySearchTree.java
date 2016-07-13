@@ -147,7 +147,7 @@ public class BinarySearchTree {
     }
 
     if(q.size()!=0) {
-      levelOrder(q.peek(), q);
+      levelOrder((Node)q.peek(), q);
     }
   }
 

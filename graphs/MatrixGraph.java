@@ -1,5 +1,6 @@
 package graphs;
 
+import queues.Queue;
 import stacks.Stack;
 /**
  * Created by sj034021 on 6/16/16.
@@ -84,6 +85,25 @@ public class MatrixGraph {
     }
   }
 
+  public void iterativeBreadthFirstSearch(int fromVertex) {
+    Queue<Integer> queue = new Queue<Integer>(10);
+    queue.enqueue(fromVertex);
+    visited[fromVertex] = true;
+
+    while (queue.size()!= 0) {
+      int topMostElement = queue.peek();
+      System.out.println(topMostElement);
+      queue.dequeue();
+
+      for(int i=1; i< numberOfVertices; i++) {
+        if(matrix[topMostElement][i] == 1 && !visited[i]) {
+          visited[i] = true;
+          queue.enqueue(i);
+        }
+      }
+    }
+  }
+
   //Iterative
   public void iterativeDepthFirstTraversalApproach2(int fromVertex) {
     Stack<Integer> stack = new Stack<Integer>(10);
@@ -143,7 +163,8 @@ public class MatrixGraph {
     graph.addEdge(3,8);
 
     //graph.iterativeDepthFirstTraversal(1);
-    graph.recursiveDepthFirstTraversal(1);
+    //graph.recursiveDepthFirstTraversal(1);
+    graph.iterativeBreadthFirstSearch(1);
     //graph.printMatrix();
   }
 }
