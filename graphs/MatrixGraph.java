@@ -1,5 +1,6 @@
 package graphs;
 
+import stacks.Stack;
 /**
  * Created by sj034021 on 6/16/16.
  */
@@ -37,7 +38,7 @@ public class MatrixGraph {
   }
 
   // Using a recursive approach, the stack memory increases, so it is wise to use iterative approach(uses heap memory)
-  public void depthFirstTraversal(int fromVertex) {
+  public void recursiveDepthFirstTraversal(int fromVertex) {
     if(visited[fromVertex] == true) {
       return;
     }
@@ -47,7 +48,61 @@ public class MatrixGraph {
 
     for(int i = 1; i<numberOfVertices; i++) {
       if (matrix[fromVertex][i] == 1) {
-        depthFirstTraversal(i);
+        recursiveDepthFirstTraversal(i);
+      }
+    }
+  }
+
+  //Iterative
+  public void iterativeDepthFirstTraversalApproach1(int fromVertex) {
+    Stack<Integer> stack = new Stack<Integer>(10);
+    stack.push(fromVertex);
+
+    boolean flag = false;
+    while(stack.size()!=0) {
+      int topMostElement = stack.peek();
+      if(visited[topMostElement] == false) {
+        System.out.println(topMostElement);
+      }
+
+      visited[topMostElement] = true;
+
+      for(int i = 1; i<numberOfVertices; i++) {
+        if(matrix[topMostElement][i] == 1 && !visited[i]) {
+
+          stack.push(i);
+          flag = false;
+          break;
+        } else {
+          flag = true;
+        }
+      }
+
+      if(flag == true && stack.size()!=0) {
+        stack.pop();
+      }
+    }
+  }
+
+  //Iterative
+  public void iterativeDepthFirstTraversalApproach2(int fromVertex) {
+    Stack<Integer> stack = new Stack<Integer>(10);
+    stack.push(fromVertex);
+    visited[fromVertex] = true;
+
+    while(stack.size()!=0) {
+      int topMostElement = stack.peek();
+      System.out.println(topMostElement);
+
+      stack.pop();
+
+      for(int i = 1; i<numberOfVertices; i++) {
+        if(matrix[topMostElement][i] == 1 && !visited[i]) {
+
+          visited[i] = true;
+          stack.push(i);
+          break;
+        }
       }
     }
   }
@@ -87,7 +142,8 @@ public class MatrixGraph {
     graph.addEdge(6,3);
     graph.addEdge(3,8);
 
-    graph.depthFirstTraversal(1);
+    //graph.iterativeDepthFirstTraversal(1);
+    graph.recursiveDepthFirstTraversal(1);
     //graph.printMatrix();
   }
 }
