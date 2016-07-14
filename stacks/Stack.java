@@ -7,8 +7,10 @@ public class Stack<T> {
   T elements[];
   int top = -1;
 
-  public Stack(int size) {
-    elements = (T[]) new Object [size];
+  int capacity = 5;
+
+  public Stack() {
+    elements = (T[]) new Object [capacity];
   }
 
   public int size() {
@@ -16,8 +18,12 @@ public class Stack<T> {
   }
 
   public void push(T data) {
-    top++;
 
+  if(size() == capacity) {
+    expandStack();
+  }
+
+    top++;
     elements[top] = data;
   }
 
@@ -30,6 +36,17 @@ public class Stack<T> {
     top--;
   }
 
+  public void expandStack() {
+    capacity = capacity*2;
+    T newArray[] = (T[]) new Object[capacity];
+
+    for(int i=0; i<elements.length; i++) {
+      newArray[i] = elements[i];
+    }
+
+    elements = newArray;
+  }
+
   public void print() {
     for(int i=0; i< size(); i++) {
       System.out.println(elements[i]);
@@ -37,13 +54,13 @@ public class Stack<T> {
   }
 
   public static void main(String args[]) {
-    Stack<String> s= new Stack<String>(10);
+    Stack<Integer> s= new Stack<Integer>();
 
-    s.push("Hi");
-    s.push("Hello");
-    s.push("Cool");
-    s.pop();
-
+    s.push(1);
+    s.push(1);
+    s.push(1);
+    s.push(1);
+    s.push(1);
     // System.out.print(s.peek());
     s.print();
   }

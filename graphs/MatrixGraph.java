@@ -56,7 +56,7 @@ public class MatrixGraph {
 
   //Iterative
   public void iterativeDepthFirstTraversalApproach1(int fromVertex) {
-    Stack<Integer> stack = new Stack<Integer>(10);
+    Stack<Integer> stack = new Stack<Integer>();
     stack.push(fromVertex);
 
     boolean flag = false;
@@ -106,7 +106,7 @@ public class MatrixGraph {
 
   //Iterative
   public void iterativeDepthFirstTraversalApproach2(int fromVertex) {
-    Stack<Integer> stack = new Stack<Integer>(10);
+    Stack<Integer> stack = new Stack<Integer>();
     stack.push(fromVertex);
     visited[fromVertex] = true;
 
