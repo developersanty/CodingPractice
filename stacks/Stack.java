@@ -52,7 +52,7 @@ public class Stack<T> {
       System.out.println(elements[i]);
     }
   }
-  
+
   // reversing a stack using recursion
   public void reverse(Stack<T> stack) {
 
@@ -79,15 +79,47 @@ public class Stack<T> {
     stack.push(currentElement);
   }
 
+  // sort a stack using recursion
+  public void sort(Stack<T> stack) {
+    if(stack.size() == 0) {
+      return;
+    }
+
+    T topElement = stack.peek();
+    stack.pop();
+    sort(stack);
+
+    rearrange(topElement, stack);
+  }
+
+  public void rearrange(T topElement, Stack<T> stack) {
+    if(stack.size() == 0) {
+      stack.push(topElement);
+      return;
+    }
+
+    if((Integer)stack.peek() > (Integer)topElement) {
+      T greaterElement = stack.peek();
+      stack.pop();
+      rearrange(topElement, stack);
+      stack.push(greaterElement);
+    } else {
+      stack.push(topElement);
+    }
+  }
+
   public static void main(String args[]) {
     Stack<Integer> s= new Stack<Integer>();
 
+    s.push(9);
     s.push(1);
-    s.push(2);
-    s.push(3);
     s.push(4);
-    s.push(5);
-    s.reverse(s);
+    s.push(3);
+    s.push(7);
+    s.push(2);
+
+    //s.reverse(s);
+    s.sort(s);
     // System.out.print(s.peek());
     s.print();
   }
