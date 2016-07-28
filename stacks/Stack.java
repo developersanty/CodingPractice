@@ -108,19 +108,73 @@ public class Stack<T> {
     }
   }
 
+  public boolean checkForBalancedParenthesis(Stack<T> stack) {
+    boolean status = true;
+
+    if(stack.size() == 0) {
+      return status;
+    }
+
+    T topElement = stack.peek();
+    stack.pop();
+
+    status = checkForBalancedParenthesis(stack);
+
+    if (status == false) {
+      return status;
+    }
+
+    if(topElement.equals("]") || topElement.equals("}") || topElement.equals(")") ) {
+      stack.push(topElement);
+      return true;
+    } else {
+      if(stack.size() == 0) {
+        // open braces as the last element
+        return false;
+      }
+
+      T poppedElement = stack.peek();
+
+      if(isMirror((String)poppedElement, (String)topElement)) {
+        stack.pop();
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  public boolean isMirror(String closedElement, String openElement) {
+    if((closedElement.equals("]") && openElement.equals("[")) || (closedElement.equals("}") && openElement.equals("{")) || (closedElement.equals(")") && openElement.equals("("))) {
+      return true;
+    }
+
+    return false;
+  }
+
   public static void main(String args[]) {
-    Stack<Integer> s= new Stack<Integer>();
+    Stack<String> s= new Stack<String>();
 
-    s.push(9);
-    s.push(1);
-    s.push(4);
-    s.push(3);
-    s.push(7);
-    s.push(2);
-
+    s.push("}");
+    s.push(")");
+    s.push("(");
+    s.push("]");
+    s.push(")");
+    s.push("(");
+    s.push(")");
+    s.push("(");
+    s.push("[");
+    s.push("{");
+    s.push("}");
+    s.push("{");
+    s.push("]");
+    s.push(")");
+    s.push("(");
+    s.push("[");
+    System.out.print(s.checkForBalancedParenthesis(s));
     //s.reverse(s);
-    s.sort(s);
+    //s.sort(s);
     // System.out.print(s.peek());
-    s.print();
+    //s.print();
   }
 }
